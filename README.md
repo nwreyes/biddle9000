@@ -3,12 +3,16 @@
 # Dependencies
 - npm (and the 300 packages it installs)
 - python 
-- Flask
-- flask_cors
-- requests
-- Manim FFmpeg
-- OpenGL
-- LaTeX
+- pip
+    - Flask
+    - flask_cors
+    - requests
+    - Manim
+    - ffmpeg
+    - OpenGL
+    - LaTeX
+    - manim
+    - manimgl
 
 # Installing and Running
 1. In the inner biddle9000 directory, run "npm i"
