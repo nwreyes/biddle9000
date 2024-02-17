@@ -18,11 +18,11 @@ def hello_world():
 @app.route('/generate_video')
 def generate_video():
     # Your Manim script to generate the MP4 file
-    scene = manimTest.SquareToCircle()
+    scene = manimTest.Equation()
     scene.render()
 
     # Return the path to the generated MP4 file
-    return send_file('media\\videos\\1080p60\\SquareToCircle.mp4')
+    return send_file('media\\videos\\1080p60\\Equation.mp4')
 
 
 
