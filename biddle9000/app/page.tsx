@@ -1,21 +1,18 @@
 "use client";
 
 import VideoPlayer from "./VideoPlayer";
+import KatexSpan from "./KatexSpan";
 
-
+const quadraticEquationTest = `Given a general quadratic equation of the form
+$$ax^{2} + bx + c = 0$$
+with $x$ representing an unknown, with $a$, $b$ and $c$ representing constants, and with $a \\ne 0$, the quadratic formula is:
+$$x = \\frac{-b \\pm \\sqrt{b^{2} - 4ac}}{2a}$$`;
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        
-        <VideoPlayer/>
-        
-      </div>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24 gap-4">
+      <VideoPlayer/>
+      <KatexSpan text={quadraticEquationTest} />
     </main>
   );
 }
