@@ -2,6 +2,7 @@ from flask import Flask, send_file
 from flask_cors import CORS
 import requests
 import manimTest
+import imageParse 
 
 # Create an instance of the Flask class
 app = Flask(__name__)
@@ -17,6 +18,7 @@ def hello_world():
 # Define a route and the associated function to handle requests to that route
 @app.route('/generate_video')
 def generate_video():
+    
     # Your Manim script to generate the MP4 file
     scene = manimTest.Equation()
     scene.render()

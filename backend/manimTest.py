@@ -1,9 +1,11 @@
 from manim import *
+import imageParse
 
 class Equation(Scene):
     def construct(self):
         # Define the function and its derivative
-        function_tex = r"f(x) = x^2"
+        latex = imageParse.parseImage()
+        function_tex = rf"{latex}"
         derivative_tex = r"\frac{d}{dx}f(x) = 2x"
 
         # Create MathTex objects to render the equations
