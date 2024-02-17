@@ -4,6 +4,8 @@
 - npm (and the 300 packages it installs)
 - python 
 - Flask
+- flask_cors
+- requests
 - Manim FFmpeg
 - OpenGL
 - LaTeX

@@ -1,7 +1,12 @@
 from flask import Flask
+from flask_cors import CORS
+import requests
+
 
 # Create an instance of the Flask class
 app = Flask(__name__)
+CORS(app)  # This will enable CORS for all routes
+
 
 # Define a route and the associated function to handle requests to that route
 @app.route('/')
