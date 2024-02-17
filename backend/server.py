@@ -1,5 +1,6 @@
 from flask import Flask, send_file
 from flask_cors import CORS
+from sys import platform
 import requests
 import manimTest
 import imageParse 
@@ -24,10 +25,12 @@ def generate_video():
     scene.render()
 
     # Return the path to the generated MP4 file
+    if platform == 'darwin' or 'linux':
+        return send_file('media/videos/1080p60/Equation.mp4')
     return send_file('media\\videos\\1080p60\\Equation.mp4')
 
 
 
 # Run the Flask application
 if __name__ == '__main__':
-    app.run(debug=True)  # Set debug=True for development, it will automatically reload the server when you make changes
+    app.run(debug=True)  # Set debug=True for development, it :will automatically reload the server when you make changes
