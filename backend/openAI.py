@@ -1,9 +1,12 @@
 from openai import OpenAI
-
+import os
 import config
+import sys
+import json
 # Create an instance of the Flask class
+os.environ["OPENAI_API_KEY"] = config.OPENAI_KEY
 
-openai.api_key = config.API_KEY
+# openai.api_key = config.API_KEY
 
 client = OpenAI()
 
@@ -49,22 +52,50 @@ gpt_func_definition = {
     }
 }
 
-response = client.chat.completions.create(
-  model="gpt-4-vision-preview",
-  messages=[
-    {
-      "role": "user",
-      "content": [
-        {"type": "text", "text": "What’s in this image?"},
-        {
-          "type": "image_url",
-          "image_url": {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
-          },
-        },
-      ],
-    }
-  ],
-)
+tools = [gpt_func_definition]
 
-print(response.choices[0])
+def getStuff(text):
+  completion = client.chat.completions.create(
+    model="gpt-4-turbo-preview",
+    messages=[
+      {
+        "role": "system",
+        "content": "You are a math teacher and a student has asked you to help them understand the problem better. You should create a visualization and explanation to help them understand the problem and concepts better."
+      },
+      {
+        "role": "user",
+        "content": [
+          {"type": "text", "text": text},
+        ],
+      },
+    ],
+    tools=tools,
+    tool_choice={"type": "function", "function": {"name": "math_problem_helper"}}
+  )
+
+  args = json.loads(completion.choices[0].message.tool_calls[0].function.arguments)
+  print(args, file=sys.stderr)
+
+  return args
+
+  
+
+# response = client.chat.completions.create(
+#   model="gpt-4-vision-preview",
+#   messages=[
+#     {
+#       "role": "user",
+#       "content": [
+#         {"type": "text", "text": "What’s in this image?"},
+#         {
+#           "type": "image_url",
+#           "image_url": {
+#             "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg",
+#           },
+#         },
+#       ],
+#     }
+#   ],
+# )
+
+# print(response.choices[0])

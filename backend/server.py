@@ -1,9 +1,13 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, jsonify
 from flask_cors import CORS
 from sys import platform
 import requests
 # import manimTest
+import openAIParser
+import openAI
 from manim import *
+
+explanation = ""
 
 # Create an instance of the Flask class
 app = Flask(__name__)
@@ -20,24 +24,17 @@ def hello_world():
 @app.route('/generate_video')
 def generate_video():
     
+
+    latexFormula = openAIParser.parseImage()
+    args = openAI.getStuff(latexFormula)
+
+    global explanation
+
+    class_string = args["visualization_code"]
+    explanation = args["explanation"]
+    
+
     # Your Manim script to generate the MP4 file
-
-    # Class definition as a string
-    class_string = """class Equation(Scene):
-        def construct(self):
-            function_tex = r"f(x) = x^2"
-            derivative_tex = r"\\frac{d}{dx}f(x) = 2x"
-
-            function_equation = MathTex(function_tex)
-            derivative_equation = MathTex(derivative_tex)
-
-            function_equation.to_edge(UP)
-            derivative_equation.next_to(function_equation, DOWN, buff=0.5)
-
-            self.play(Write(function_equation))
-            self.wait(1)
-            self.play(Write(derivative_equation))
-            self.wait(2)"""
 
     # Dictionary to capture the local variables after exec
     local_variables = {}
@@ -54,7 +51,11 @@ def generate_video():
         return send_file('media/videos/1080p60/Equation.mp4')
     return send_file('media\\videos\\1080p60\\Equation.mp4')
 
-
+@app.route('/get_explanation')
+def get_explanation():
+    # return explanation in body text
+    global explanation
+    return jsonify({"explanation": explanation})
 
 # Run the Flask application
 if __name__ == '__main__':
