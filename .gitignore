@@ -1,2 +1,4 @@
 media/
 backend/__pycache__
+
+config.py
