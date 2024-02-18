@@ -39,6 +39,7 @@ function VideoPlayer() {
 
   const sendToBackend = async (data: any) => {
     // Use fetch or Axios to send data to the backend
+    setLoadingText('Loading...');
     try {
       const response = await fetch('http://localhost:5000/generate_video_base64', {
         method: 'POST',
@@ -61,6 +62,7 @@ function VideoPlayer() {
     let explanation = await response2.json();
     console.log(explanation)
     setExplanation(explanation.explanation);
+    setLoadingText('');
     } catch (error) {
       console.error('Error sending data to backend:', error);
     }
@@ -113,7 +115,8 @@ function VideoPlayer() {
                 {/* <button onClick={sendRequestToFlask} className="px-8 py-4 bg-white border-2 border-black rounded-lg transition-color hover:bg-black hover:text-white active:translate-y-2">
                 Test
                 </button> */}
-                {mp4Url === '' ? <p>{loadingText}</p> : <video key={mp4Url} width="640" height="480" controls>
+                <p>{loadingText}</p>
+                {mp4Url === '' ? <p></p> : <video key={mp4Url} width="640" height="480" controls>
                     <source src={mp4Url} type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>}
