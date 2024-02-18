@@ -100,13 +100,14 @@ function VideoPlayer() {
   
 
     return (
-        <div className="flex flex-col gap-4 items-center p-4 rounded-3xl">
-            <div>
-                <h2>Copy a screenshot and paste it here</h2>
+        <div className="flex flex-col bg-biddle-white gap-4 min-h-[800px] items-center pb-20 p-4 rounded-3xl w-2/3 border-4 border-black">
+            <div className="flex flex-col gap-4">
+                <h2 className="font-bold w-64 text-center text-xl">Copy a screenshot and paste it here</h2>
                 <div
                     contentEditable={true} // Allows the div to accept pasted content
                     onPaste={handlePaste} // Handle the paste event
-                    style={{ border: '1px solid black', padding: '20px' }}
+                    className="border-4 border-black p-4 min-h-24 rounded-lg flex justify-center items-center bg-white"
+                    // style={{ border: '1px solid black', padding: '20px' }}
                 >
                 
                 </div>
@@ -116,10 +117,13 @@ function VideoPlayer() {
                 Test
                 </button> */}
                 <p>{loadingText}</p>
-                {mp4Url === '' ? <p></p> : <video key={mp4Url} width="640" height="480" controls>
+                {mp4Url === '' ? <p></p> : <div className="flex flex-col items-center">
+                <video className="border-8 border-gray-400 rounded shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]" key={mp4Url} width="640" height="480" controls>
                     <source src={mp4Url} type="video/mp4" />
                     Your browser does not support the video tag.
-                </video>}
+                </video>
+                <div className="w-64 my-8 h-0 border-2 border-black"/>
+                  </div>}
                 {/* <video key={mp4Url} width="640" height="480" controls>
                     <source src={mp4Url} type="video/mp4" />
                     Your browser does not support the video tag.

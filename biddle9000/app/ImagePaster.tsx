@@ -54,7 +54,8 @@ function ImagePaster() {
         <div
             contentEditable={true} // Allows the div to accept pasted content
             onPaste={handlePaste} // Handle the paste event
-            style={{ border: '1px solid black', padding: '20px' }}
+            className="border-2 border-black p-4 rounded"
+            // style={{ border: '1px solid black', padding: '20px' }}
         >
         
         </div>

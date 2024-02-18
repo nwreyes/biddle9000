@@ -23,7 +23,7 @@ export default function KatexSpan({ text, ...delegated }: { text: string, [key: 
   }, [text]);
 
   return (
-    <div ref={katexTextRef} {...delegated} className="w-1/2">
+    <div ref={katexTextRef} {...delegated} className="w-2/3">
       {text}
     </div>
   );
