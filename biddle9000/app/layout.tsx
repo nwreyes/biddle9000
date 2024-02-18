@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Manim Generator",
-  description: "LETS GOOOO",
+  title: "Biddl-E9000",
+  description: "Visualize your math!",
 };
 
 export default function RootLayout({
