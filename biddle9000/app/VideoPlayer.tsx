@@ -90,6 +90,7 @@ function VideoPlayer() {
         let explanation = await response2.json();
         console.log(explanation)
         setExplanation(explanation.explanation);
+        setLoadingText('');
 
         
         }
