@@ -2,7 +2,8 @@ from flask import Flask, send_file
 from flask_cors import CORS
 from sys import platform
 import requests
-import manimTest
+# import manimTest
+from manim import *
 
 # Create an instance of the Flask class
 app = Flask(__name__)
@@ -19,8 +20,33 @@ def hello_world():
 @app.route('/generate_video')
 def generate_video():
     # Your Manim script to generate the MP4 file
-    scene = manimTest.Equation()
-    scene.render()
+
+    # Class definition as a string
+    class_string = """class Equation(Scene):
+        def construct(self):
+            function_tex = r"f(x) = x^2"
+            derivative_tex = r"\\frac{d}{dx}f(x) = 2x"
+
+            function_equation = MathTex(function_tex)
+            derivative_equation = MathTex(derivative_tex)
+
+            function_equation.to_edge(UP)
+            derivative_equation.next_to(function_equation, DOWN, buff=0.5)
+
+            self.play(Write(function_equation))
+            self.wait(1)
+            self.play(Write(derivative_equation))
+            self.wait(2)"""
+
+    # Dictionary to capture the local variables after exec
+    local_variables = {}
+    
+    # Execute the class definition, capturing the result in local_variables
+    exec(class_string, globals(), local_variables)
+    
+    # Instantiate the class using the captured local variables
+    equation = local_variables['Equation']()
+    equation.render()
 
     # Return the path to the generated MP4 file
     if platform == 'darwin' or 'linux':
