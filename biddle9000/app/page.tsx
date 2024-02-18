@@ -11,7 +11,7 @@ $$x = \\frac{-b \\pm \\sqrt{b^{2} - 4ac}}{2a}$$`;
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-12 gap-4 bg-gradient-to-b from-emerald-500 to-emerald-900 text-black">
+    <main className="flex min-h-screen flex-col items-center justify-between p-12 gap-4 bg-gradient-to-b from-emerald-500 to-[#006747] text-black">
       {/* <div className={styles.cool}></div> */}
 
       
