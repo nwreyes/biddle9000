@@ -1,5 +1,6 @@
 from flask import Flask, send_file, jsonify, request
 from flask_cors import CORS
+import sys
 from sys import platform
 import requests
 # import manimTest
@@ -21,15 +22,15 @@ def generate_video_base64():
     request_data = request.json
     screenshot_data = request_data.get('screenshotData')
     latexFormula = openAIParser.parseImageBase64(screenshot_data)
-    args = openAI.getStuff(latexFormula)
 
     global explanation
 
-    class_string = args["visualization_code"]
-    explanation = args["explanation"]
-    
-
-    # Your Manim script to generate the MP4 file
+    # args = openAI.getStuff(latexFormula)
+    print("got latex formula", file=sys.stderr)
+    class_string = openAIParser.getVisualization(latexFormula)
+    print("got class string", file=sys.stderr)
+    explanation = openAIParser.getExplanation(latexFormula)
+    print("got explanation", file=sys.stderr)
 
     # Dictionary to capture the local variables after exec
     local_variables = {}
@@ -46,45 +47,14 @@ def generate_video_base64():
         return send_file('media/videos/1080p60/Equation.mp4')
     return send_file('media\\videos\\1080p60\\Equation.mp4')
 
-    
 
 
-# Define a route and the associated function to handle requests to that route
-@app.route('/generate_video')
-def generate_video():
-    
-
-    latexFormula = openAIParser.parseImage()
-    args = openAI.getStuff(latexFormula)
-
-    global explanation
-
-    class_string = args["visualization_code"]
-    explanation = args["explanation"]
-    
-
-    # Your Manim script to generate the MP4 file
-
-    # Dictionary to capture the local variables after exec
-    local_variables = {}
-    
-    # Execute the class definition, capturing the result in local_variables
-    exec(class_string, globals(), local_variables)
-    
-    # Instantiate the class using the captured local variables
-    equation = local_variables['Equation']()
-    equation.render()
-
-    # Return the path to the generated MP4 file
-    if platform == 'darwin' or 'linux':
-        return send_file('media/videos/1080p60/Equation.mp4')
-    return send_file('media\\videos\\1080p60\\Equation.mp4')
 
 @app.route('/get_explanation')
 def get_explanation():
     # return explanation in body text
     global explanation
-    # explanation = explanation.replace('\n', '<br/>')
+    # explanation = explanation.replace('\n', ')
     return jsonify({"explanation": explanation})
 
 # Run the Flask application
