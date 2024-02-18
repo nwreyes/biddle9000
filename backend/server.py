@@ -1,4 +1,4 @@
-from flask import Flask, send_file, jsonify
+from flask import Flask, send_file, jsonify, request
 from flask_cors import CORS
 from sys import platform
 import requests
@@ -15,9 +15,15 @@ CORS(app)  # This will enable CORS for all routes
 
 
 # Define a route and the associated function to handle requests to that route
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+@app.route('/generate_video_base64', methods=['POST'])
+def generate_video_base64():
+    # Extract the screenshot data from the request JSON payload
+    request_data = request.json
+    screenshot_data = request_data.get('screenshotData')
+    latexFormula = openAIParser.parseImageBase64(screenshot_data)
+    print(latexFormula)
+
+    
 
 
 # Define a route and the associated function to handle requests to that route

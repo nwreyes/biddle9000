@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import KatexSpan from './KatexSpan';
+import ImagePaster from './ImagePaster';
 
 function VideoPlayer() {
     const [mp4Url, setMp4Url] = useState('');
@@ -54,6 +55,7 @@ function VideoPlayer() {
                 </button>
             </div>
             <KatexSpan text={explanation}></KatexSpan>
+            <ImagePaster/>
         </div>
     );
 }
