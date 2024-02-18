@@ -22,6 +22,7 @@ def generate_video_base64():
     screenshot_data = request_data.get('screenshotData')
     latexFormula = openAIParser.parseImageBase64(screenshot_data)
     print(latexFormula)
+    return latexFormula
 
     
 

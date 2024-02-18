@@ -80,7 +80,7 @@ def parseImageBase64(base64_image):
             {
             "type": "image_url",
             "image_url": {
-                "url": f"data:image/png;base64,{base64_image}"
+                "url": f"{base64_image}"
             },
             },
         ],
@@ -96,7 +96,7 @@ def parseImageBase64(base64_image):
         {
         "role": "user",
         "content": [
-            {"type": "text", "text": f" Output this as latex. {response.choices[0].message.content}\n\n ONLY the equation in latex such as \int (u dv). DO NOT output anything other than the latex."}
+            {"type": "text", "text": f" Output this as latex if possible. If it is not possible, say 'This is not an equation.' IF IT IS: {response.choices[0].message.content}\n\n ONLY the equation in latex such as \int (u dv). DO NOT output anything other than the latex."}
         ],
         }
     ],
