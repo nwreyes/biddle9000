@@ -103,7 +103,7 @@ function VideoPlayer() {
     return (
         <div className="flex flex-col bg-biddle-white gap-4 min-h-[800px] items-center pb-20 p-4 rounded-3xl w-2/3 border-4 border-black">
             <div className="flex flex-col gap-4">
-                <h2 className="font-bold w-64 text-center text-xl">Copy a screenshot and paste it here</h2>
+                <h2 className="font-bold w-64 text-center text-xl">Take a screenshot and paste it here</h2>
                 <div
                     contentEditable={true} // Allows the div to accept pasted content
                     onPaste={handlePaste} // Handle the paste event
