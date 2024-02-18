@@ -18,7 +18,7 @@ export default function Home() {
 
 
       <VideoPlayer/>
-      <KatexSpan text={quadraticEquationTest} />
+      {/* <KatexSpan text={quadraticEquationTest} /> */}
     </main>
   );
 }

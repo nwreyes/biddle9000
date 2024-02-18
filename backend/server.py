@@ -55,6 +55,7 @@ def generate_video():
 def get_explanation():
     # return explanation in body text
     global explanation
+    # explanation = explanation.replace('\n', '<br/>')
     return jsonify({"explanation": explanation})
 
 # Run the Flask application

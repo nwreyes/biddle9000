@@ -12,23 +12,26 @@ client = OpenAI()
 
 example_function = """class Equation(Scene):
     def construct(self):
-        # Define the function and its derivative
-        function_tex = r"f(x) = x^2"
-        derivative_tex = r"\frac{d}{dx}f(x) = 2x"
+        # Create axes
+        axes = Axes(
+            x_range=[-3, 3],
+            y_range=[-1, 8],
+            axis_config={"color": BLUE},
+        )
 
-        # Create MathTex objects to render the equations
-        function_equation = MathTex(function_tex)
-        derivative_equation = MathTex(derivative_tex)
+        # Original function y = x^2
+        original_function = axes.plot(lambda x: x**2, color=RED)
+        original_function_label = axes.get_graph_label(original_function, label='y=x^2')
 
-        # Position the equations on the screen
-        function_equation.to_edge(UP)
-        derivative_equation.next_to(function_equation, DOWN, buff=0.5)
+        # Derivative of the function y'= 2x
+        derivative_function = axes.plot(lambda x: 2*x, color=GREEN)
+        derivative_function_label = axes.get_graph_label(derivative_function, label="y'=2x")
 
-        # Show the equations on the screen
-        self.play(Write(function_equation))
+        # Display
+        self.play(Create(axes), Create(original_function), Write(original_function_label))
         self.wait(1)
-        self.play(Write(derivative_equation))
-        self.wait(2)"""
+        self.play(Create(derivative_function), Write(derivative_function_label))
+        self.wait(1)"""
 
 gpt_func_definition = {
     "type": "function",
@@ -40,11 +43,11 @@ gpt_func_definition = {
         "properties": {
             "visualization_code": {
                 "type": "string",
-                "description": f"The code for the python class that creates the visualization. This code will be executed to generate the visualization. Here is an example: {example_function}",
+                "description": f"The code for the python class that creates the visualization. This code will be executed to generate the visualization. The class must be named Equation. Here is an example: {example_function}",
             },
             "explanation": {
                 "type": "string",
-                "description": "An explanation of the math problem and the concepts involved. This will be used to help the student understand the problem better. Respond in LaTeX format, like this: $\\frac{d}{dx}f(x) = 2x$",
+                "description": "An explanation of the math problem and the concepts involved. This will be used to help the student understand the problem better. Respond in LaTeX format, like this: $\\frac{d}{dx}f(x) = 2x$. Put equations on their own lines to make it easier to read. When an equation is on its own line, surround it with 2 dollar signs. For example: $$\\frac{d}{dx}f(x) = 2x$$.",
             }
         },
         "required": ["visualization_code", "explanation"],
