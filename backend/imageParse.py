@@ -20,7 +20,7 @@ def parseImage():
             {
             "type": "image_url",
             "image_url": {
-                "url": "https://miro.medium.com/v2/resize:fit:640/format:webp/1*-PGZIOCgY_qbzeI_yGFO4A.png",
+                "url": "https://i.redd.it/a65fiaqmyh681.jpg",#https://miro.medium.com/v2/resize:fit:640/format:webp/1*-PGZIOCgY_qbzeI_yGFO4A.png
             },
             },
         ],
@@ -31,17 +31,18 @@ def parseImage():
     print("RESPONSE:"+response.choices[0].message.content)
 
     response = client.chat.completions.create(
-    model="gpt-4",
+    model="gpt-4-1106-preview",
     messages=[
         {
         "role": "user",
         "content": [
-            {"type": "text", "text": f" Output this as latex. {response.choices[0].message.content}\n\n ONLY the equation in latex such as \int (u dv). DO NOT output anything other than the latex"}
+            {"type": "text", "text": f" Output this as latex. {response.choices[0].message.content}\n\n ONLY the equation in latex such as \int (u dv). DO NOT output anything other than the latex."}
         ],
         }
     ],
     )
     print(response.choices[0].message.content)
+    value = response.choices[0].message.content.replace('{{', '{ {').replace('}}', '} }')
 
 
-    return response.choices[0].message.content
+    return value
