@@ -21,8 +21,30 @@ def generate_video_base64():
     request_data = request.json
     screenshot_data = request_data.get('screenshotData')
     latexFormula = openAIParser.parseImageBase64(screenshot_data)
-    print(latexFormula)
-    return latexFormula
+    args = openAI.getStuff(latexFormula)
+
+    global explanation
+
+    class_string = args["visualization_code"]
+    explanation = args["explanation"]
+    
+
+    # Your Manim script to generate the MP4 file
+
+    # Dictionary to capture the local variables after exec
+    local_variables = {}
+    
+    # Execute the class definition, capturing the result in local_variables
+    exec(class_string, globals(), local_variables)
+    
+    # Instantiate the class using the captured local variables
+    equation = local_variables['Equation']()
+    equation.render()
+
+    # Return the path to the generated MP4 file
+    if platform == 'darwin' or 'linux':
+        return send_file('media/videos/1080p60/Equation.mp4')
+    return send_file('media\\videos\\1080p60\\Equation.mp4')
 
     
 
