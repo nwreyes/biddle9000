@@ -113,7 +113,7 @@ function VideoPlayer() {
                 
                 </div>
             </div>
-            <div className="flex gap-4 items-center">
+            <div className="flex flex-col gap-4 items-center">
                 {/* <button onClick={sendRequestToFlask} className="px-8 py-4 bg-white border-2 border-black rounded-lg transition-color hover:bg-black hover:text-white active:translate-y-2">
                 Test
                 </button> */}
