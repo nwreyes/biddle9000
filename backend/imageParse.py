@@ -16,7 +16,7 @@ def parseImage():
         {
         "role": "user",
         "content": [
-            {"type": "text", "text": "The following is a screenshot of a math equation. please write the equation as a string. If the image is not of an equation, say 'this is not an equation'"},
+            {"type": "text", "text": "The following is a screenshot of a math equation or matrix or similar math object. Please write the equation as a string. If it is a matrix or vector, format it as [[a, b], [c, d]]"},
             {
             "type": "image_url",
             "image_url": {

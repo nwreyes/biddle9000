@@ -7,6 +7,10 @@ import { useEffect, useRef } from 'react';
 
 export default function KatexSpan({ text, ...delegated }: { text: string, [key: string]: any }) {
   const katexTextRef = useRef<HTMLDivElement | null>(null);
+
+  // replace \n in text with newlines
+  text = text.replace(/\\n/g, '\n');
+
   useEffect(() => {
     if (katexTextRef.current) {
       renderMathInElement(katexTextRef.current, {
